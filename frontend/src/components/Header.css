@@ -1,0 +1,89 @@
+.header {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.name-container {
+  text-align: left;
+}
+
+.first-name,
+.last-name {
+  display: flex;
+  font-size: 4rem;
+  font-weight: 300;
+  letter-spacing: 0.5rem;
+  margin: 0.5rem 0;
+}
+
+.first-name .letter:nth-child(1),
+.first-name .letter:nth-child(6) {
+  color: #8b5cf6;
+}
+
+.last-name .letter:nth-child(3) {
+  color: #8b5cf6;
+}
+
+.letter {
+  display: inline-block;
+  animation: letterSpacing 2s ease-in-out infinite;
+  color: #ffffff;
+}
+
+@keyframes letterSpacing {
+  0%, 100% {
+    letter-spacing: 0.5rem;
+    transform: translateX(0);
+  }
+  50% {
+    letter-spacing: 1rem;
+    transform: translateX(5px);
+  }
+}
+
+/* Stagger animation for each letter */
+.letter:nth-child(even) {
+  animation-delay: 0.1s;
+}
+
+.letter:nth-child(odd) {
+  animation-delay: 0.2s;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .first-name,
+  .last-name {
+    font-size: 2rem;
+    letter-spacing: 0.3rem;
+  }
+
+  @keyframes letterSpacing {
+    0%, 100% {
+      letter-spacing: 0.3rem;
+      transform: translateX(0);
+    }
+    50% {
+      letter-spacing: 0.6rem;
+      transform: translateX(3px);
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .first-name,
+  .last-name {
+    font-size: 1.5rem;
+    letter-spacing: 0.2rem;
+  }
+
+  .name-container {
+    flex-direction: column;
+  }
+}
+
+/* Made with Bob */

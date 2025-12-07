@@ -1,0 +1,51 @@
+.about-section {
+  margin: 4rem 0;
+}
+
+.about-content {
+  margin-bottom: 3rem;
+}
+
+.intro {
+  color: #8b5cf6;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.description {
+  color: #cccccc;
+  font-size: 1rem;
+  line-height: 1.8;
+  max-width: 800px;
+}
+
+.highlight {
+  color: #8b5cf6;
+  font-weight: 500;
+}
+
+.about-content a {
+  color: #8b5cf6;
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+
+.about-content a:hover {
+  color: #a78bfa;
+}
+
+@media (max-width: 768px) {
+  .about-section {
+    margin: 2rem 0;
+  }
+
+  .intro {
+    font-size: 1rem;
+  }
+
+  .description {
+    font-size: 0.9rem;
+  }
+}
+
+/* Made with Bob */
