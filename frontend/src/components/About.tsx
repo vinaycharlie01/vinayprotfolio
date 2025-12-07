@@ -4,7 +4,7 @@ import './About.css';
 const About: React.FC = () => {
   return (
     <section id="about" className="about-section">
-      <h2>Hey, I'm Vinaykumar</h2>
+      <h2 className="led-text">Hey, I'm Vinaykumar</h2>
       <div className="about-content">
         <p className="intro">
           I am...
@@ -18,16 +18,16 @@ const About: React.FC = () => {
       </div>
 
       <div className="about-content">
-        <h2>Around the Internet</h2>
+        <h2 className="led-text">Around the Internet</h2>
         <p className="description">
-          This site is the center of my online presence, the <a href="#projects">projects section</a> contains 
+          This site is the center of my online presence, the <a href="#projects">projects section</a> contains
           write ups of experiments with cloud native tech and microservices. Occasionally, I may appear in{' '}
           <span className="highlight">Go (programming language)</span> related projects.
         </p>
       </div>
 
       <div className="about-content">
-        <h2>Work</h2>
+        <h2 className="led-text">Work</h2>
         <p className="description">
           For work, I prod at clouds with Go and way too much bash + yaml. Observability, in its various forms, 
           are my primary interest area (maintaining black boxes is too painful). Software Supply Chain Security 

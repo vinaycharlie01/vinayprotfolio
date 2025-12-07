@@ -14,24 +14,49 @@
 .last-name {
   display: flex;
   font-size: 4rem;
-  font-weight: 300;
+  font-family: 'NDOT', 'Courier New', monospace;
+  font-weight: 400;
   letter-spacing: 0.5rem;
   margin: 0.5rem 0;
+  text-transform: uppercase;
 }
 
-.first-name .letter:nth-child(1),
-.first-name .letter:nth-child(6) {
+.letter {
+  background: linear-gradient(135deg, #8b5cf6, #ffffff, #8b5cf6, #ffffff);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   color: #8b5cf6;
+  animation: gradient-shift 3s ease infinite;
 }
 
-.last-name .letter:nth-child(3) {
-  color: #8b5cf6;
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes letterSpacing {
+  0%, 100% {
+    letter-spacing: 0.5rem;
+    transform: translateX(0);
+  }
+  50% {
+    letter-spacing: 1rem;
+    transform: translateX(5px);
+  }
 }
 
 .letter {
   display: inline-block;
-  animation: letterSpacing 2s ease-in-out infinite;
-  color: #ffffff;
+  animation: letterSpacing 2s ease-in-out infinite, gradient-shift 3s ease infinite;
 }
 
 @keyframes letterSpacing {
