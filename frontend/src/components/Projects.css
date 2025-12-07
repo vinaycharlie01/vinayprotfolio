@@ -7,7 +7,7 @@
   display: grid;
   gap: 1rem;
   margin-top: 2rem;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: 1fr;
 }
 
 /* Bento Grid Layout for larger screens */
@@ -44,7 +44,7 @@
 }
 
 .project-card {
-  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+  background: #000000;
   border: 1px solid #333;
   border-radius: 16px;
   padding: 1.5rem;
@@ -228,51 +228,87 @@
 
 /* Mobile responsiveness */
 @media (max-width: 768px) {
+  .projects-section {
+    margin: 3rem 0;
+  }
+
   .projects-grid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
+    margin-top: 1.5rem;
   }
 
   .project-card {
     padding: 1.25rem;
+    min-height: auto;
+    width: 100%;
   }
 
   .project-card--small,
   .project-card--medium,
   .project-card--large {
-    grid-column: span 1;
-    grid-row: span 1;
+    grid-column: span 1 !important;
+    grid-row: span 1 !important;
   }
 
   .project-title {
     font-size: 1.15rem;
+    line-height: 1.4;
   }
 
   .project-description {
     font-size: 0.9rem;
+    line-height: 1.5;
   }
 
   .project-highlights li {
     font-size: 0.8rem;
+    line-height: 1.5;
+  }
+
+  .project-label {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.6rem;
   }
 }
 
 @media (max-width: 480px) {
   .projects-section {
-    margin: 3rem 0;
+    margin: 2rem 0;
+  }
+
+  .projects-grid {
+    gap: 1rem;
   }
 
   .project-card {
     padding: 1rem;
+    border-radius: 12px;
   }
 
   .project-title {
     font-size: 1.05rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .project-description {
+    font-size: 0.85rem;
+    margin-bottom: 0.75rem;
   }
 
   .tech-tag {
+    font-size: 0.7rem;
+    padding: 0.25rem 0.6rem;
+  }
+
+  .project-highlights li {
     font-size: 0.75rem;
-    padding: 0.3rem 0.7rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .project-label {
+    font-size: 0.65rem;
+    padding: 0.25rem 0.5rem;
   }
 }
 
