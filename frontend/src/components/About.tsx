@@ -20,18 +20,19 @@ const About: React.FC = () => {
       <div className="about-content">
         <h2 className="led-text">Around the Internet</h2>
         <p className="description">
-          <span className="bullet">»</span> This site is the center of my online presence, the <a href="#projects">projects section</a> contains
-          write ups of experiments with cloud native tech and microservices. Occasionally, I may appear in{' '}
-          <span className="highlight">Go (programming language)</span> related projects.
+          <span className="bullet">»</span> This site is the center of my online presence. The <a href="#projects">projects section</a> contains
+          write-ups of experiments with cloud native tech and microservices. I primarily work on{' '}
+          <span className="highlight">Go</span> projects.
         </p>
       </div>
 
       <div className="about-content">
         <h2 className="led-text">Work</h2>
         <p className="description">
-          <span className="bullet">»</span> For work, I prod at clouds with Go and way too much bash + yaml. Observability, in its various forms,
-          are my primary interest area (maintaining black boxes is too painful). Software Supply Chain Security
-          comes second (got to find something interesting when working on all those CI/CD pipelines).
+          <span className="bullet">»</span> I build scalable backend systems and automation tools using Go.
+          My expertise includes developing Kubernetes Operators, CLI tools, and microservices architectures.
+          I work with Docker, Kubernetes, Helm, and CI/CD pipelines across cloud platforms (IBM Cloud, GCP, AWS).
+          Just a Gopher trying to make sense of the cloud, one goroutine at a time.
         </p>
       </div>
     </section>

@@ -2,6 +2,7 @@
 
 A modern, minimalist portfolio website built with React and TypeScript, inspired by clean design principles.
 
+
 ## Features
 
 - 🎨 Dark theme with purple/violet accents
