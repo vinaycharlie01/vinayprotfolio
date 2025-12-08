@@ -19,6 +19,13 @@
   max-width: 800px;
 }
 
+.bullet {
+  color: #8b5cf6;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-right: 0.5rem;
+}
+
 .highlight {
   color: #8b5cf6;
   font-weight: 500;
@@ -46,6 +53,10 @@
 
   .description {
     font-size: 0.9rem;
+  }
+
+  .bullet {
+    font-size: 1.1rem;
   }
 }
 

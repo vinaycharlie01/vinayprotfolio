@@ -41,18 +41,6 @@ const FindMe: React.FC = () => {
           </div>
         ))}
       </div>
-
-      <div className="certifications">
-        <h3>Certifications</h3>
-        <div className="cert-list">
-          <div className="cert-item">
-            <span className="link-bullet">»</span>
-            <span className="cert-name">HackerRank</span>
-            <span className="link-separator">—</span>
-            <span className="cert-description">Python Basic, SQL Basic</span>
-          </div>
-        </div>
-      </div>
     </section>
   );
 };
