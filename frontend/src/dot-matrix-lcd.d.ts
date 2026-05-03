@@ -13,4 +13,4 @@ declare module 'dot-matrix-lcd' {
   export default DotMatrixLCD;
 }
 
-// Made with Bob
+

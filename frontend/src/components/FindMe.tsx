@@ -49,4 +49,4 @@ const FindMe: React.FC = () => {
 
 export default FindMe;
 
-// Made with Bob
+
