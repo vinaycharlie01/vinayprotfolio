@@ -1,5 +1,6 @@
 import React from 'react';
-import './FindMe.css';
+import '../styles/FindMe.css';
+import GitHubActivity from './GitHubActivity';
 
 const FindMe: React.FC = () => {
   const links = [
@@ -27,12 +28,11 @@ const FindMe: React.FC = () => {
 
   return (
     <section id="contact" className="findme-section">
-      <h2>Find Me</h2>
+      <h2 className="led-text">Find Me</h2>
       
-      <div className="links-container">
+      <div className="timeline">
         {links.map((link, index) => (
           <div key={index} className="link-item">
-            <span className="link-bullet">»</span>
             <a href={link.url} target="_blank" rel="noopener noreferrer" className="link-name">
               {link.name}
             </a>
@@ -41,6 +41,8 @@ const FindMe: React.FC = () => {
           </div>
         ))}
       </div>
+      
+      <GitHubActivity />
     </section>
   );
 };

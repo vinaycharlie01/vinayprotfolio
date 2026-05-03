@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { gsap } from 'gsap';
-import './App.css';
-import Header from './components/Header';
+import './styles/App.css';
 import About from './components/About';
 import WorkExperience from './components/WorkExperience';
 import Projects from './components/Projects';
@@ -48,7 +47,6 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
       <main className="main-content">
         <About />
         <WorkExperience />
@@ -73,4 +71,5 @@ function App() {
 
 export default App;
 
-// Made with Bob
+// cd /home/ubuntu/vi/vinayprotfolio && rm -rf vinaycharlie01.github.io/* && cp -r frontend/build/* vinaycharlie01.github.io/ && ls -la vinaycharlie01.github.io/
+

@@ -1,6 +1,6 @@
-import React, { useRef, useEffect, useCallback, useState } from 'react';
-import { gsap } from 'gsap';
-import './Projects.css';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import '../styles/Projects.css';
 
 interface Project {
   title: string;
@@ -8,270 +8,14 @@ interface Project {
   technologies: string[];
   highlights: string[];
   label: string;
-  gridSpan?: string;
 }
-
-const MOBILE_BREAKPOINT = 768;
-const DEFAULT_GLOW_COLOR = '139, 92, 246'; // Purple color matching your theme
-
-const createParticleElement = (x: number, y: number, color = DEFAULT_GLOW_COLOR) => {
-  const el = document.createElement('div');
-  el.className = 'particle';
-  el.style.cssText = `
-    position: absolute;
-    width: 3px;
-    height: 3px;
-    border-radius: 50%;
-    background: rgba(${color}, 1);
-    box-shadow: 0 0 6px rgba(${color}, 0.6);
-    pointer-events: none;
-    z-index: 100;
-    left: ${x}px;
-    top: ${y}px;
-  `;
-  return el;
-};
-
-interface ProjectCardProps {
-  project: Project;
-  index: number;
-  isMobile: boolean;
-}
-
-const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, isMobile }) => {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const particlesRef = useRef<HTMLDivElement[]>([]);
-  const timeoutsRef = useRef<NodeJS.Timeout[]>([]);
-  const isHoveredRef = useRef(false);
-  const memoizedParticles = useRef<HTMLDivElement[]>([]);
-  const particlesInitialized = useRef(false);
-
-  const initializeParticles = useCallback(() => {
-    if (particlesInitialized.current || !cardRef.current) return;
-
-    const { width, height } = cardRef.current.getBoundingClientRect();
-    memoizedParticles.current = Array.from({ length: 8 }, () =>
-      createParticleElement(Math.random() * width, Math.random() * height, DEFAULT_GLOW_COLOR)
-    );
-    particlesInitialized.current = true;
-  }, []);
-
-  const clearAllParticles = useCallback(() => {
-    timeoutsRef.current.forEach(clearTimeout);
-    timeoutsRef.current = [];
-
-    particlesRef.current.forEach(particle => {
-      gsap.to(particle, {
-        scale: 0,
-        opacity: 0,
-        duration: 0.3,
-        ease: 'back.in(1.7)',
-        onComplete: () => {
-          particle.parentNode?.removeChild(particle);
-        }
-      });
-    });
-    particlesRef.current = [];
-  }, []);
-
-  const animateParticles = useCallback(() => {
-    if (!cardRef.current || !isHoveredRef.current) return;
-
-    if (!particlesInitialized.current) {
-      initializeParticles();
-    }
-
-    memoizedParticles.current.forEach((particle, idx) => {
-      const timeoutId = setTimeout(() => {
-        if (!isHoveredRef.current || !cardRef.current) return;
-
-        const clone = particle.cloneNode(true) as HTMLDivElement;
-        cardRef.current.appendChild(clone);
-        particlesRef.current.push(clone);
-
-        gsap.fromTo(clone, { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: 'back.out(1.7)' });
-
-        gsap.to(clone, {
-          x: (Math.random() - 0.5) * 80,
-          y: (Math.random() - 0.5) * 80,
-          rotation: Math.random() * 360,
-          duration: 2 + Math.random() * 2,
-          ease: 'none',
-          repeat: -1,
-          yoyo: true
-        });
-
-        gsap.to(clone, {
-          opacity: 0.4,
-          duration: 1.5,
-          ease: 'power2.inOut',
-          repeat: -1,
-          yoyo: true
-        });
-      }, idx * 100);
-
-      timeoutsRef.current.push(timeoutId);
-    });
-  }, [initializeParticles]);
-
-  useEffect(() => {
-    if (isMobile || !cardRef.current) return;
-
-    const element = cardRef.current;
-
-    const handleMouseEnter = () => {
-      isHoveredRef.current = true;
-      animateParticles();
-
-      gsap.to(element, {
-        rotateX: 3,
-        rotateY: 3,
-        duration: 0.3,
-        ease: 'power2.out',
-        transformPerspective: 1000
-      });
-    };
-
-    const handleMouseLeave = () => {
-      isHoveredRef.current = false;
-      clearAllParticles();
-
-      gsap.to(element, {
-        rotateX: 0,
-        rotateY: 0,
-        x: 0,
-        y: 0,
-        duration: 0.3,
-        ease: 'power2.out'
-      });
-    };
-
-    const handleMouseMove = (e: MouseEvent) => {
-      const rect = element.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-
-      const rotateX = ((y - centerY) / centerY) * -8;
-      const rotateY = ((x - centerX) / centerX) * 8;
-
-      gsap.to(element, {
-        rotateX,
-        rotateY,
-        duration: 0.1,
-        ease: 'power2.out',
-        transformPerspective: 1000
-      });
-
-      const magnetX = (x - centerX) * 0.03;
-      const magnetY = (y - centerY) * 0.03;
-
-      gsap.to(element, {
-        x: magnetX,
-        y: magnetY,
-        duration: 0.3,
-        ease: 'power2.out'
-      });
-    };
-
-    const handleClick = (e: MouseEvent) => {
-      const rect = element.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-
-      const maxDistance = Math.max(
-        Math.hypot(x, y),
-        Math.hypot(x - rect.width, y),
-        Math.hypot(x, y - rect.height),
-        Math.hypot(x - rect.width, y - rect.height)
-      );
-
-      const ripple = document.createElement('div');
-      ripple.style.cssText = `
-        position: absolute;
-        width: ${maxDistance * 2}px;
-        height: ${maxDistance * 2}px;
-        border-radius: 50%;
-        background: radial-gradient(circle, rgba(${DEFAULT_GLOW_COLOR}, 0.4) 0%, rgba(${DEFAULT_GLOW_COLOR}, 0.2) 30%, transparent 70%);
-        left: ${x - maxDistance}px;
-        top: ${y - maxDistance}px;
-        pointer-events: none;
-        z-index: 1000;
-      `;
-
-      element.appendChild(ripple);
-
-      gsap.fromTo(
-        ripple,
-        { scale: 0, opacity: 1 },
-        {
-          scale: 1,
-          opacity: 0,
-          duration: 0.8,
-          ease: 'power2.out',
-          onComplete: () => ripple.remove()
-        }
-      );
-    };
-
-    element.addEventListener('mouseenter', handleMouseEnter);
-    element.addEventListener('mouseleave', handleMouseLeave);
-    element.addEventListener('mousemove', handleMouseMove);
-    element.addEventListener('click', handleClick);
-
-    return () => {
-      isHoveredRef.current = false;
-      element.removeEventListener('mouseenter', handleMouseEnter);
-      element.removeEventListener('mouseleave', handleMouseLeave);
-      element.removeEventListener('mousemove', handleMouseMove);
-      element.removeEventListener('click', handleClick);
-      clearAllParticles();
-    };
-  }, [animateParticles, clearAllParticles, isMobile]);
-
-  return (
-    <div
-      ref={cardRef}
-      className={`project-card ${project.gridSpan || ''}`}
-      style={{ position: 'relative', overflow: 'hidden' }}
-    >
-      <div className="project-card__header">
-        <span className="project-label">{project.label}</span>
-      </div>
-
-      <div className="project-card__content">
-        <h3 className="project-title">{project.title}</h3>
-        <p className="project-description">{project.description}</p>
-
-        <div className="project-tech">
-          {project.technologies.map((tech, idx) => (
-            <span key={idx} className="tech-tag">{tech}</span>
-          ))}
-        </div>
-
-        {project.highlights.length > 0 && (
-          <ul className="project-highlights">
-            {project.highlights.map((highlight, idx) => (
-              <li key={idx}>{highlight}</li>
-            ))}
-          </ul>
-        )}
-      </div>
-    </div>
-  );
-};
 
 const Projects: React.FC = () => {
-  const gridRef = useRef<HTMLDivElement>(null);
-  const [isMobile, setIsMobile] = useState(false);
+  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
 
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth <= MOBILE_BREAKPOINT);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
+  const toggleExpand = (index: number) => {
+    setExpandedIndex(expandedIndex === index ? null : index);
+  };
 
   const projects: Project[] = [
     {
@@ -279,34 +23,42 @@ const Projects: React.FC = () => {
       description: "A Go code designed to generate Go struct definitions from JSON input, simplifying the process of creating Go structs corresponding to JSON data structures.",
       technologies: ["Go", "JSON", "Mux"],
       highlights: [],
-      label: "Code Gen",
-      gridSpan: "project-card--small"
+      label: "Code Gen"
     },
     {
       title: "Image Message Queuing System",
-      description: "A message queuing system that efficiently handles product data, receiving product information via API, storing it in a database, and processing by downloading and compressing product images.",
+      description: "Developed a message queuing system that efficiently handles product data. This involves receiving product information via an API, storing it in a database, and then processing it by downloading and compressing product images.",
       technologies: ["Golang", "MongoDB", "Kafka"],
       highlights: [
-        "Designed database schemas for Users and Products tables",
-        "Handled complex data structures like image URLs and local paths"
+        "Designed database schemas for Users and Products tables, handling complex data structures like image URLs and local paths"
       ],
-      label: "Queue System",
-      gridSpan: "project-card--medium"
+      label: "Queue System"
+    },
+    {
+      title: "K0s Cluster Shared Framework",
+      description: "Designed and implemented a hexagonal (ports & adapters) architecture-based cluster automation library in Go.",
+      technologies: ["Golang", "Kubernetes", "k0s", "k0sctl"],
+      highlights: [
+        "Abstracted Kubernetes cluster lifecycle operations (Apply, Reset, GetStatus, GetKubeconfig) via clean port interfaces",
+        "Built a pluggable adapter over the k0sctl action layer to manage control-plane and worker nodes programmatically",
+        "Implemented structured logging using slog for consistent orchestration observability",
+        "Followed SOLID principles and dependency inversion to decouple business logic from orchestration tools"
+      ],
+      label: "Cluster Framework"
     },
     {
       title: "In-Memory Data Aggregation API",
-      description: "Designed and implemented raw user-level data for an ad network with in-memory data aggregation for billions of requests daily.",
+      description: "Designed and implemented raw user-level data for an ad network.",
       technologies: ["Go", "MongoDB", "Docker", "Kafka", "Prometheus", "Grafana"],
       highlights: [
-        "Managed in-memory data aggregation optimizing for performance and scalability",
-        "Utilized concurrent processing for thread-safe data handling",
-        "Calculated unique daily active users (DAU) with metrics like AdRequest, AdResponse, AdImpression, and AdClicks",
-        "Integrated Kafka with dead letter queue for reliable message processing",
+        "Managed in-memory data aggregation for billions of requests daily, optimizing for performance and scalability under high write loads",
+        "Utilized concurrent processing techniques to ensure thread-safe data handling, calculating unique daily active users (DAU) alongside metrics like AdRequest, AdResponse, AdImpression, and AdClicks",
+        "Integrated Kafka for reliable message queuing, utilizing a dead letter queue to handle processing failures and ensure no data loss",
         "Leveraged Prometheus and Grafana for monitoring system performance",
-        "Developed graceful shutdown mechanism to prevent data loss"
+        "Conducted comprehensive test cases to validate correctness and performance under various load scenarios",
+        "Developed a graceful shutdown mechanism to handle service termination without data loss"
       ],
-      label: "Data API",
-      gridSpan: "project-card--large"
+      label: "Data API"
     }
   ];
 
@@ -314,14 +66,97 @@ const Projects: React.FC = () => {
     <section id="projects" className="projects-section">
       <h2 className="led-text">Projects</h2>
       
-      <div className="projects-grid bento-grid" ref={gridRef}>
+      <div className="timeline">
         {projects.map((project, index) => (
-          <ProjectCard
+          <motion.div
             key={index}
-            project={project}
-            index={index}
-            isMobile={isMobile}
-          />
+            className="project-item"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+          >
+            <motion.div
+              className="project-header clickable"
+              onClick={() => toggleExpand(index)}
+              style={{ cursor: 'pointer' }}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+                <h3 style={{ margin: 0 }}>
+                  <span className="project-label-inline">{project.label}</span> {project.title}
+                </h3>
+                {expandedIndex !== index && (
+                  <motion.button
+                    key={`btn-${index}`}
+                    className="expand-button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      toggleExpand(index);
+                    }}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    animate={{
+                      y: [0, -3, 0],
+                    }}
+                    transition={{
+                      y: {
+                        duration: 1.5,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }
+                    }}
+                  >
+                    <motion.span
+                      animate={{
+                        opacity: [0.6, 1, 0.6],
+                      }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }}
+                    >
+                      View Details
+                    </motion.span>
+                  </motion.button>
+                )}
+              </div>
+              <p className="project-description-preview">{project.description}</p>
+            </motion.div>
+            <AnimatePresence>
+              {expandedIndex === index && (
+                <motion.div
+                  className="project-details"
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <div className="project-tech">
+                    {project.technologies.map((tech, idx) => (
+                      <span key={idx} className="tech-tag">{tech}</span>
+                    ))}
+                  </div>
+
+                  {project.highlights.length > 0 && (
+                    <ul className="project-highlights">
+                      {project.highlights.map((highlight, idx) => (
+                        <motion.li
+                          key={idx}
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: idx * 0.1 }}
+                        >
+                          {highlight}
+                        </motion.li>
+                      ))}
+                    </ul>
+                  )}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
         ))}
       </div>
     </section>

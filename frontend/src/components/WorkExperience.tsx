@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import './WorkExperience.css';
+import '../styles/WorkExperience.css';
 
 interface Experience {
   title: string;
@@ -24,11 +24,13 @@ const WorkExperience: React.FC = () => {
       period: "Nov 2024 - Present",
       location: "Kochi, India",
       description: [
-        "Developed and maintained a self-hosted CLI tool (stanctl) in Golang to automate Instana deployment",
-        "Designed and maintained a Kubernetes Operator in Golang to automate deployment and lifecycle management",
-        "Added support for automatically creating VPCs on IBM Cloud and provisioning Kubernetes clusters",
-        "Contributed to open-source CoreDNS Helm chart, improving flexibility and test coverage",
-        "Designed and tested infrastructure workflows deployed across IBM Cloud and GCP"
+        "Developed and maintained a self-hosted CLI tool (stanctl) in Golang to automate Instana deployment using simple commands",
+        "Designed, Developed and maintained a Kubernetes Operator in Golang to automate deployment and lifecycle management of Instana components",
+        "Added support to the CLI for automatically creating VPCs on IBM Cloud, provisioning Kubernetes clusters, and deploying Instana agents end-to-end",
+        "Implemented logic to handle major agent upgrades smoothly and added flags to control Helm chart values dynamically",
+        "Enhanced Kubernetes component support, including automation for CoreDNS, Metrics Server on K3s clusters",
+        "Contributed to the open-source CoreDNS Helm chart, improving flexibility and Helm 100% test coverage",
+        "Designed and tested infrastructure workflows deployed across IBM Cloud, AWS and GCP"
       ]
     },
     {
@@ -37,11 +39,12 @@ const WorkExperience: React.FC = () => {
       period: "April 2022 - Nov 2024",
       location: "Bangalore, India",
       description: [
-        "Developed wellness application for HPE clients using event-driven architecture",
-        "Implemented microservices in Golang using goroutines, channels, and RESTful APIs",
-        "Developed plugins to handle different events with shared object files",
-        "Utilized Docker for containerization and Jenkins for CI/CD pipelines",
-        "Used Kafka for real-time data processing and Elasticsearch for log management"
+        "Developed wellness application for HPE clients, focusing on processing various input event sources for different array storage within HPE devices",
+        "Implemented microservices in Golang using goroutines, channels, OOP principles, RESTful APIs, and concurrency patterns",
+        "Developed plugins to handle different events using shared object files, making it flexible and easier to extend",
+        "Used Kafka for real-time data processing and message streaming",
+        "Utilized Docker for containerization and Jenkins CI/CD pipelines to automate deployment",
+        "Used Elasticsearch for data visualization, query generation, and log management"
       ]
     }
   ];

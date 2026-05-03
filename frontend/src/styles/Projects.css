@@ -1,25 +1,19 @@
-.work-section {
+.projects-section {
   margin: 4rem 0;
-}
-
-.work-subtitle {
-  color: #666;
-  font-size: 0.9rem;
-  margin-bottom: 2rem;
 }
 
 .timeline {
   margin: 2rem 0;
 }
 
-.experience-item {
+.project-item {
   margin-bottom: 3rem;
   padding-left: 1.5rem;
   border-left: 2px solid #333;
   position: relative;
 }
 
-.experience-item::before {
+.project-item::before {
   content: '»';
   position: absolute;
   left: -0.6rem;
@@ -28,15 +22,15 @@
   font-size: 1.2rem;
 }
 
-.experience-header {
+.project-header {
   transition: opacity 0.2s ease;
 }
 
-.experience-header.clickable:hover {
+.project-header.clickable:hover {
   opacity: 0.8;
 }
 
-.experience-header h3 {
+.project-header h3 {
   font-size: 1.1rem;
   font-weight: 400;
   margin-bottom: 0.5rem;
@@ -45,19 +39,42 @@
   gap: 0.5rem;
 }
 
+.project-label-inline {
+  font-family: 'NDOT', sans-serif;
+  color: #8b5cf6;
+  cursor: default;
+  transition: color 0.3s ease;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+
+.project-label-inline:hover {
+  color: #a78bfa;
+}
+
+.project-description-preview {
+  color: #cccccc;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
 .expand-button {
   background: #000000;
   color: white;
   border: 1px solid rgba(139, 92, 246, 0.3);
-  padding: 0.5rem 1.2rem;
-  border-radius: 20px;
+  padding: 0.3rem 0.8rem;
+  border-radius: 15px;
   font-family: 'NDOT', sans-serif;
-  font-size: 0.65rem;
+  font-size: 0.5rem;
   font-weight: 400;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   cursor: pointer;
-  box-shadow: 0 0 20px rgba(139, 92, 246, 0.2);
+  box-shadow: 0 0 15px rgba(139, 92, 246, 0.2);
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
@@ -120,43 +137,41 @@
   z-index: 1;
 }
 
-.company-link {
-  font-family: 'NDOT', sans-serif;
-  color: #8b5cf6;
-  cursor: default;
-  transition: color 0.3s ease;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+.project-details {
+  overflow: hidden;
+  margin-top: 1rem;
 }
 
-.company-link:hover {
-  color: #a78bfa;
-}
-
-.experience-meta {
+.project-tech {
   display: flex;
-  gap: 1rem;
-  font-size: 0.9rem;
-  color: #999;
-  margin-bottom: 1rem;
   flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
 }
 
-.period {
-  color: #8b5cf6;
+.tech-tag {
+  background: rgba(139, 92, 246, 0.1);
+  color: #a78bfa;
+  padding: 0.4rem 0.9rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  transition: all 0.2s ease;
 }
 
-.location {
-  color: #999;
+.tech-tag:hover {
+  background: rgba(139, 92, 246, 0.2);
+  border-color: rgba(139, 92, 246, 0.4);
+  transform: translateY(-2px);
 }
 
-.experience-description {
+.project-highlights {
   list-style: none;
   padding-left: 0;
-  overflow: hidden;
 }
 
-.experience-description li {
+.project-highlights li {
   color: #cccccc;
   font-size: 0.95rem;
   line-height: 1.6;
@@ -165,52 +180,33 @@
   position: relative;
 }
 
-.experience-description li::before {
+.project-highlights li::before {
   content: '—';
   position: absolute;
   left: 0;
   color: #666;
 }
 
-.education {
-  margin-top: 3rem;
-  padding-left: 1.5rem;
-  border-left: 2px solid #333;
-  position: relative;
-}
-
-.education::before {
-  content: '»';
-  position: absolute;
-  left: -0.6rem;
-  top: 0;
-  color: #8b5cf6;
-  font-size: 1.2rem;
-}
-
-.education h3 {
-  font-size: 1.1rem;
-  font-weight: 400;
-  margin-bottom: 0.5rem;
-}
-
 @media (max-width: 768px) {
-  .experience-item,
-  .education {
+  .project-item {
     padding-left: 1rem;
   }
 
-  .experience-header h3 {
+  .project-header h3 {
     font-size: 1rem;
   }
 
-  .experience-meta {
-    flex-direction: column;
-    gap: 0.3rem;
+  .project-description-preview {
+    font-size: 0.9rem;
   }
 
-  .experience-description li {
+  .project-highlights li {
     font-size: 0.9rem;
+  }
+
+  .tech-tag {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.7rem;
   }
 }
 

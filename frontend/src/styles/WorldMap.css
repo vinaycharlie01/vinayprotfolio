@@ -1,0 +1,201 @@
+.worldmap-section {
+  margin: 4rem 0;
+}
+
+.map-container {
+  width: 100%;
+  max-width: 1000px;
+  margin: 2rem auto;
+  background-color: transparent;
+  border: none;
+  overflow: hidden;
+  padding: 0;
+}
+
+.world-map {
+  width: 100%;
+  height: 600px;
+  position: relative;
+  overflow: hidden;
+}
+
+.map-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: brightness(0.6) contrast(1.1);
+}
+
+.markers-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.location-marker {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  pointer-events: all;
+  cursor: pointer;
+}
+
+.marker-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #666;
+  border: 3px solid #8b5cf6;
+  position: relative;
+  z-index: 2;
+  transition: all 0.3s ease;
+}
+
+.location-marker.current .marker-dot {
+  background-color: #8b5cf6;
+  border-color: #a78bfa;
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.8);
+}
+
+.location-marker.based .marker-dot {
+  background-color: #a78bfa;
+  border-color: #8b5cf6;
+  box-shadow: 0 0 15px rgba(167, 139, 250, 0.6);
+}
+
+.marker-pulse {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid #8b5cf6;
+  animation: pulse 2s ease-out infinite;
+  z-index: 1;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(3);
+  }
+}
+
+.location-marker:hover .marker-dot {
+  transform: scale(1.3);
+  box-shadow: 0 0 30px rgba(139, 92, 246, 1);
+}
+
+.places-list {
+  margin-top: 2rem;
+}
+
+.places-note {
+  color: #999;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.marker-legend {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 0.3rem;
+}
+
+.current-marker {
+  background-color: #8b5cf6;
+  border: 2px solid #a78bfa;
+  box-shadow: 0 0 10px rgba(139, 92, 246, 0.6);
+}
+
+.based-marker {
+  background-color: #a78bfa;
+  border: 2px solid #8b5cf6;
+  box-shadow: 0 0 8px rgba(167, 139, 250, 0.5);
+}
+
+.separator {
+  color: #666;
+  margin: 0 0.5rem;
+}
+
+.places-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 0.8rem;
+}
+
+.place-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.place-bullet {
+  color: #8b5cf6;
+  font-size: 1.2rem;
+}
+
+.place-name {
+  color: #cccccc;
+  font-size: 0.95rem;
+}
+
+.place-name.current {
+  font-weight: 700;
+  color: #8b5cf6;
+}
+
+.place-name.based {
+  font-weight: 600;
+  color: #a78bfa;
+}
+
+@media (max-width: 768px) {
+  .map-container {
+    padding: 1rem;
+  }
+
+  .world-map {
+    height: 400px;
+  }
+
+  .marker-dot {
+    width: 12px;
+    height: 12px;
+    border-width: 2px;
+  }
+
+  .places-grid {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .place-item {
+    font-size: 0.9rem;
+  }
+
+  .places-note {
+    font-size: 0.85rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}
+
+/* Made with Bob */

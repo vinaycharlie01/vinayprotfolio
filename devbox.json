@@ -1,0 +1,21 @@
+{
+    "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/0.17.0/.schema/devbox.schema.json",
+    "packages": [
+        "go@latest",
+        "python@3.11",
+        "nodejs_20",
+        "mage@latest",
+        "direnv@latest"
+    ],
+    "shell": {
+        "init_hook": [
+            "echo 'Welcome to Milk Predictor Development Environment!' > /dev/null",
+            "echo 'Available: Go, Python, Node.js, Mage'"
+        ],
+        "scripts": {
+            "test": [
+                "echo \"Error: no test specified\" && exit 1"
+            ]
+        }
+    }
+}
