@@ -1,0 +1,29 @@
+# Node.js configuration for frontend
+directory: frontend
+
+# Setup configuration
+setup:
+  install: true
+
+# Run configuration
+run:
+  script: dev
+  args: []
+
+# Build configuration
+build:
+  script: build
+  args: []
+
+# Test configuration
+test:
+  script: test
+
+# Clean configuration
+clean:
+  paths:
+    - node_modules
+    - dist
+  args: []
+
+

@@ -1,0 +1,166 @@
+.github-activity {
+  margin: 3rem 0;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+}
+
+.activity-title {
+  color: #8b5cf6;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  font-weight: 400;
+  font-family: 'NDOT', sans-serif;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.contribution-graph {
+  margin: 1.5rem 0;
+}
+
+.months-labels {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+  padding-left: 0;
+}
+
+.month-label {
+  font-size: 0.75rem;
+  color: #999;
+  min-width: 50px;
+}
+
+.graph-container {
+  display: flex;
+  gap: 0;
+}
+
+.days-labels {
+  display: none;
+}
+
+.weeks {
+  display: flex;
+  gap: 3px;
+  flex-wrap: wrap;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.week {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.day {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.day:hover {
+  transform: scale(1.2);
+  border: 1px solid #8b5cf6;
+}
+
+.level-0 {
+  background-color: #1a1a1a;
+  border: 1px solid #2a2a2a;
+}
+
+.level-1 {
+  background-color: rgba(139, 92, 246, 0.2);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+}
+
+.level-2 {
+  background-color: rgba(139, 92, 246, 0.4);
+  border: 1px solid rgba(139, 92, 246, 0.5);
+}
+
+.level-3 {
+  background-color: rgba(139, 92, 246, 0.6);
+  border: 1px solid rgba(139, 92, 246, 0.7);
+}
+
+.level-4 {
+  background-color: #8b5cf6;
+  border: 1px solid #a78bfa;
+  box-shadow: 0 0 8px rgba(139, 92, 246, 0.4);
+}
+
+.activity-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.contribution-count {
+  color: #999;
+  font-size: 0.85rem;
+}
+
+.legend {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: #999;
+}
+
+.legend-colors {
+  display: flex;
+  gap: 3px;
+}
+
+.legend-box {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+}
+
+.github-link {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .github-activity {
+    padding: 0;
+  }
+
+  .months-labels {
+    padding-left: 0;
+    gap: 0.5rem;
+  }
+
+  .month-label {
+    min-width: 30px;
+    font-size: 0.65rem;
+  }
+
+
+  .day {
+    width: 10px;
+    height: 10px;
+  }
+
+  .legend-box {
+    width: 10px;
+    height: 10px;
+  }
+
+  .activity-footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* Made with Bob */

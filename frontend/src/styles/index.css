@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'NDOT';
+  src: url('/NDOT-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@layer components {
+  .led-text {
+    font-family: 'NDOT', sans-serif;
+    font-size: 1.8rem;
+    line-height: 1.8rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    color: #8b5cf6;
+    margin-bottom: 1.5rem;
+  }
+  
+  .led-text-bold {
+    font-family: 'NDOT', sans-serif;
+    color: #8b5cf6;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-weight: 700;
+}
+
+body {
+  margin: 0;
+  font-family: 'Courier New', Courier, monospace;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  background-color: #000000;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+  font-weight: 700;
+}
+
+/* Global bold white box-style text for all elements */
+h1, h2, h3, h4, h5, h6, p, span, div, a, li, button, label, input, textarea {
+  font-weight: 700;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Larger font sizes */
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.5rem; }
+h4 { font-size: 1.25rem; }
+p, span, div, a, li { font-size: 1.1rem; }
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Selection color */
+::selection {
+  background-color: #8b5cf6;
+  color: #ffffff;
+}
+
+::-moz-selection {
+  background-color: #8b5cf6;
+  color: #ffffff;
+}
+
+/* Made with Bob */

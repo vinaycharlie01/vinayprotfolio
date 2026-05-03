@@ -1,37 +1,35 @@
 import React from 'react';
-import './About.css';
+import '../styles/About.css';
 
 const About: React.FC = () => {
   return (
     <section id="about" className="about-section">
-      <h2>Hey, I'm Vinaykumar</h2>
+      <h2 className="led-text">Hey, I'm Vinaykumar</h2>
       <div className="about-content">
-        <p className="intro">
-          I am...
-        </p>
-        <p className="description">
-          An experienced Golang Developer with over 3.5 years of experience in building scalable backend systems, 
-          Kubernetes Operators, and self-hosted automation CLI tools. Proficient in Go, Kubernetes, Helm, Docker, 
-          and event-driven microservices. If you're interested in collaboration or just want to chat about tech, 
-          <a href="#contact"> contact for details</a>.
+        <p className="description ">
+          Backend Engineer with 4+ years of experience building scalable and high-performance microservices using Golang.
+          Strong understanding of distributed systems, concurrency, and REST API development. Experienced in working with Kubernetes, Docker, Kafka, Redis, MongoDB, PostgreSQL.
+          Hands-on experience with cloud platforms (AWS, GCP, IBM Cloud) and CI/CD pipelines. If you're interested in collaboration or just want to chat about tech,{' '}
+          <a href="#contact">contact for details</a>.
         </p>
       </div>
 
       <div className="about-content">
-        <h2>Around the Internet</h2>
+        <h2 className="led-text">Around the Internet</h2>
         <p className="description">
-          This site is the center of my online presence, the <a href="#projects">projects section</a> contains 
-          write ups of experiments with cloud native tech and microservices. Occasionally, I may appear in{' '}
-          <span className="highlight">Go (programming language)</span> related projects.
+          This site is the center of my online presence. The <a href="#projects">projects section</a> contains
+          write-ups of experiments with cloud native tech and microservices. I primarily work on{' '}
+          <span className="highlight">Go</span> projects.
         </p>
       </div>
 
       <div className="about-content">
-        <h2>Work</h2>
+        <h2 className="led-text">Work</h2>
         <p className="description">
-          For work, I prod at clouds with Go and way too much bash + yaml. Observability, in its various forms, 
-          are my primary interest area (maintaining black boxes is too painful). Software Supply Chain Security 
-          comes second (got to find something interesting when working on all those CI/CD pipelines).
+          I build scalable backend systems and automation tools using Go.
+          My expertise includes developing Kubernetes Operators, CLI tools, and microservices architectures.
+          Skilled in building reliable, event-driven systems with proper monitoring using Instana, Prometheus, Grafana, and ELK Stack.
+          I work with Docker, Kubernetes, Helm, and CI/CD pipelines across cloud platforms (IBM Cloud, GCP, AWS).
         </p>
       </div>
     </section>

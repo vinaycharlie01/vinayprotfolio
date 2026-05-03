@@ -4,6 +4,18 @@
 
 .about-content {
   margin-bottom: 3rem;
+  padding-left: 1.5rem;
+  border-left: 2px solid #333;
+  position: relative;
+}
+
+.about-content::before {
+  content: '»';
+  position: absolute;
+  left: -0.6rem;
+  top: 0;
+  color: #8b5cf6;
+  font-size: 1.2rem;
 }
 
 .intro {
@@ -19,6 +31,13 @@
   max-width: 800px;
 }
 
+.bullet {
+  color: #8b5cf6;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-right: 0.5rem;
+}
+
 .highlight {
   color: #8b5cf6;
   font-weight: 500;
@@ -26,12 +45,13 @@
 
 .about-content a {
   color: #8b5cf6;
-  text-decoration: underline;
-  transition: color 0.3s ease;
+  text-decoration: none;
+  transition: all 0.3s ease;
 }
 
 .about-content a:hover {
   color: #a78bfa;
+  transform: scale(1.05);
 }
 
 @media (max-width: 768px) {
@@ -45,6 +65,10 @@
 
   .description {
     font-size: 0.9rem;
+  }
+
+  .bullet {
+    font-size: 1.1rem;
   }
 }
 
