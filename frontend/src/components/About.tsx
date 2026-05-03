@@ -38,4 +38,4 @@ const About: React.FC = () => {
 
 export default About;
 
-// Made with Bob
+

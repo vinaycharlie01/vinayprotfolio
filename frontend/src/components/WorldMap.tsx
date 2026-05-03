@@ -39,4 +39,4 @@ const WorldMap: React.FC = () => {
 
 export default WorldMap;
 
-// Made with Bob
+

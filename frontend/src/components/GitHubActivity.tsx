@@ -134,4 +134,3 @@ const GitHubActivity: React.FC = () => {
 
 export default GitHubActivity;
 
-// Made with Bob
