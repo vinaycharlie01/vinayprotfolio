@@ -1,0 +1,73 @@
+name: Build and publish portfolio
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: portfolio-publish
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build site
+        run: npm run build
+
+      - name: Verify publish token
+        env:
+          PAGES_TOKEN: ${{ secrets.PAGES_TOKEN }}
+        run: |
+          if [ -z "$PAGES_TOKEN" ]; then
+            echo "::error::The PAGES_TOKEN secret is not set."
+            echo "Add a fine-grained personal access token with Contents: read and write on vinaycharlie01/vinaycharlie01.github.io."
+            exit 1
+          fi
+
+      - name: Checkout publish repository
+        uses: actions/checkout@v4
+        with:
+          repository: vinaycharlie01/vinaycharlie01.github.io
+          token: ${{ secrets.PAGES_TOKEN }}
+          path: pages
+
+      - name: Publish
+        run: |
+          set -euo pipefail
+
+          # Replace the published tree, but keep the publish repository's Git
+          # metadata and its Pages workflow.
+          rsync -a --delete \
+            --exclude='.git/' \
+            --exclude='.github/' \
+            .vitepress/dist/ pages/
+
+          cd pages
+          git add -A
+
+          if git diff --cached --quiet; then
+            echo "No changes to publish."
+            exit 0
+          fi
+
+          git -c user.name="vinay-portfolio-bot" \
+              -c user.email="portfolio@vinaycharlie01.dev" \
+              commit -m "Deploy portfolio from vinayprotfolio@${GITHUB_SHA::7}"
+          git push

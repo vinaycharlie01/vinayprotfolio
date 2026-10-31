@@ -1,9 +1,0 @@
-# Development configuration registry
-# This file maps services to their language-specific configuration files
-
-services:
-  # Frontend (Node.js)
-  frontend:
-    language: nodejs
-    filepath: frontend/nodejs-config.yaml
-
