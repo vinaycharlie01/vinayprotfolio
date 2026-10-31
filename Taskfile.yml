@@ -1,0 +1,65 @@
+version: '3'
+
+# Build and publish tooling for the portfolio. Run `task --list` to see tasks.
+
+vars:
+  DIST_DIR: .vitepress/dist
+  PAGES_DIR: pages
+
+tasks:
+  default:
+    desc: List the available tasks
+    silent: true
+    cmds:
+      - task --list
+
+  install:
+    desc: Install Node dependencies
+    cmds:
+      - npm ci
+
+  dev:
+    desc: Run the VitePress dev server
+    cmds:
+      - npm run dev
+
+  build:
+    desc: Build the VitePress site into {{.DIST_DIR}}
+    cmds:
+      - npm run build
+
+  preview:
+    desc: Preview the built site locally
+    cmds:
+      - npm run preview
+
+  verify-token:
+    desc: Fail if the pages publish token is missing
+    cmds:
+      - |
+        if [ -z "$PAGES_TOKEN" ]; then
+          echo "::error::The PAGES_TOKEN secret is not set."
+          echo "Add a fine-grained personal access token with Contents: read and write on vinaycharlie01/vinaycharlie01.github.io."
+          exit 1
+        fi
+
+  publish:
+    desc: Publish the built site to the pages repository
+    cmds:
+      - |
+        set -eu
+        SHORT_SHA=$(git rev-parse --short HEAD)
+        rsync -a --delete \
+          --exclude='.git/' \
+          --exclude='.github/' \
+          {{.DIST_DIR}}/ {{.PAGES_DIR}}/
+        cd {{.PAGES_DIR}}
+        git add -A
+        if git diff --cached --quiet; then
+          echo "No changes to publish."
+          exit 0
+        fi
+        git -c user.name="vinay-portfolio-bot" \
+            -c user.email="portfolio@vinaycharlie01.dev" \
+            commit -m "Deploy portfolio from $SHORT_SHA"
+        git push
